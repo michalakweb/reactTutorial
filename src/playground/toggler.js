@@ -1,31 +1,34 @@
-const appRoot = document.getElementById('app');
 
-let textP = "";
-
-const changeVisible = (e) => {
-    if(e.target.innerText != "Hide") {
-        e.target.innerText = "Hide";
-        textP = "Hi there";
+class Toggler extends React.Component {
+    constructor(props) {
+        super(props);
+        this.changeVisible = this.changeVisible.bind(this);
+        this.state = {
+            visible: false,
+        };
     }
 
-    else {
-        e.target.innerText = "Show content";
-        textP = "";
+    changeVisible() {
+        this.setState((prevState) => {
+            return {
+                visible: !prevState.visible
+            };
+        });
     }
 
-    appRender();
-};
+    render() {
+        return (
+            <div>
+                <h1>Toggler</h1>
+                <button onClick={this.changeVisible}>{this.state.visible ? "Hide" : "Show"}</button>
+                {this.state.visible && (
+                    <div>
+                        <p>Some text</p>
+                    </div>
+                )}
+            </div>
+        );
+    }
+}
 
-const appRender = () => {
-    const template = (
-        <div>
-            <h1>Apka</h1>
-            <button onClick={changeVisible}>Show content</button>
-            <p>{textP}</p>
-        </div>
-    );
-
-    ReactDOM.render(template, appRoot);
-};
-
-appRender();
+ReactDOM.render(<Toggler />, document.getElementById('app'));

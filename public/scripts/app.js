@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -8,115 +8,60 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Counter = function (_React$Component) {
-    _inherits(Counter, _React$Component);
+var Toggler = function (_React$Component) {
+    _inherits(Toggler, _React$Component);
 
-    function Counter(props) {
-        _classCallCheck(this, Counter);
+    function Toggler(props) {
+        _classCallCheck(this, Toggler);
 
-        var _this = _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (Toggler.__proto__ || Object.getPrototypeOf(Toggler)).call(this, props));
 
-        _this.handleAddOne = _this.handleAddOne.bind(_this);
-        _this.handleMinusOne = _this.handleMinusOne.bind(_this);
-        _this.handleReset = _this.handleReset.bind(_this);
+        _this.changeVisible = _this.changeVisible.bind(_this);
         _this.state = {
-            count: 0
+            visible: false
         };
         return _this;
     }
 
-    _createClass(Counter, [{
-        key: 'handleAddOne',
-        value: function handleAddOne() {
+    _createClass(Toggler, [{
+        key: "changeVisible",
+        value: function changeVisible() {
             this.setState(function (prevState) {
                 return {
-                    count: prevState.count + 1
+                    visible: !prevState.visible
                 };
             });
         }
     }, {
-        key: 'handleMinusOne',
-        value: function handleMinusOne() {
-            this.setState(function (prevState) {
-                return {
-                    count: prevState.count - 1
-                };
-            });
-        }
-    }, {
-        key: 'handleReset',
-        value: function handleReset() {
-            this.setState(function () {
-                return {
-                    count: 0
-                };
-            });
-        }
-    }, {
-        key: 'render',
+        key: "render",
         value: function render() {
             return React.createElement(
-                'div',
+                "div",
                 null,
                 React.createElement(
-                    'h1',
+                    "h1",
                     null,
-                    'Count: ',
-                    this.state.count
+                    "Toggler"
                 ),
                 React.createElement(
-                    'button',
-                    { onClick: this.handleAddOne },
-                    '+1'
+                    "button",
+                    { onClick: this.changeVisible },
+                    this.state.visible ? "Hide" : "Show"
                 ),
-                React.createElement(
-                    'button',
-                    { onClick: this.handleMinusOne },
-                    '-1'
-                ),
-                React.createElement(
-                    'button',
-                    { onClick: this.handleReset },
-                    'reset'
+                this.state.visible && React.createElement(
+                    "div",
+                    null,
+                    React.createElement(
+                        "p",
+                        null,
+                        "Some text"
+                    )
                 )
             );
         }
     }]);
 
-    return Counter;
+    return Toggler;
 }(React.Component);
 
-ReactDOM.render(React.createElement(Counter, null), document.getElementById('app'));
-
-// let count = 0;
-
-// const addOne = () => {
-//     count++;
-//     renderCounterApp();
-// };
-
-// const minusOne = () => {
-//     count--;
-//     renderCounterApp();
-// };
-
-// const reset = () => {
-//     count = 0;
-//     renderCounterApp();
-// };
-
-
-// const renderCounterApp = () => {
-//     const templateTwo = (
-//         <div>
-//             <h1>Count: {count}</h1>
-//             <button onClick={addOne}>+1</button>
-//             <button onClick={minusOne}>-1</button>
-//             <button onClick={reset}>reset</button>
-//         </div>
-//     );
-
-//     ReactDOM.render(templateTwo, appRoot);
-// }
-
-// renderCounterApp();
+ReactDOM.render(React.createElement(Toggler, null), document.getElementById('app'));
